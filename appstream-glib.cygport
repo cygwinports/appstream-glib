@@ -1,0 +1,32 @@
+inherit gnome2
+
+NAME="appstream-glib"
+VERSION=0.2.8
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="GObject AppStream metadata library"
+DESCRIPTION="This library provides GObjects and helper methods to make it easy
+to read and write AppStream metadata. It also provides a simple DOM
+implementation that makes it easy to edit nodes and convert to and from the
+standardized XML representation. It also supports reading of Debian-style
+DEP-11 metadata."
+HOMEPAGE="http://people.freedesktop.org/~hughsient/appstream-glib/"
+SRC_URI="http://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-${VERSION}.tar.xz"
+PATCH_URI="
+	0.2.8-gettext.patch
+	0.2.8-no-undefined.patch
+"
+
+PKG_NAMES="${NAME} lib${NAME}1 lib${NAME}-devel lib${NAME}-doc girepository-AppStream1.0"
+appstream_glib_CATEGORY="Devel"
+appstream_glib_SUMMARY="AppStream utilities"
+appstream_glib_CONTENTS="usr/bin/appstream-* usr/share/bash-completion/
+	usr/share/aclocal/appstream-xml.m4 usr/share/doc/
+	usr/share/installed-tests/ usr/share/locale/ usr/share/man/man1/"
+libappstream_glib1_CONTENTS="usr/bin/cygappstream-*-1.dll usr/lib/asb-plugins/"
+libappstream_glib_devel_CONTENTS="usr/include/libappstream-*
+	usr/lib/libappstream-*.dll.a usr/lib/pkgconfig/appstream-*.pc"
+libappstream_glib_doc_CATEGORY="Doc"
+libappstream_glib_doc_CONTENTS="usr/share/gtk-doc/html/appstream-glib/"
+girepository_AppStream1_0_CONTENTS="usr/*/gir*-1.0/AppStream*-1.0.*"
+
