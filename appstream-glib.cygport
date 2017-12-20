@@ -58,7 +58,6 @@ libappstream_builder_devel_CONTENTS="
 	usr/lib/libappstream-builder.dll.a
 	usr/lib/pkgconfig/appstream-builder.pc
 "
-girepository_AppStreamGlib1_0_OBSOLETES="girepository-AppStream1.0"
 girepository_AppStreamGlib1_0_CONTENTS="usr/*/gir*-1.0/AppStreamGlib-1.0.*"
 girepository_AppStreamBuilder1_0_CONTENTS="usr/*/gir*-1.0/AppStreamBuilder-1.0.*"
 appstream_glib_debuginfo_OBSOLETES="appdata-tools-debuginfo"
