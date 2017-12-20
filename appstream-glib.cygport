@@ -1,7 +1,7 @@
-inherit gnome2
+inherit meson
 
 NAME="appstream-glib"
-VERSION=0.2.8
+VERSION=0.7.4
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GObject AppStream metadata library"
@@ -12,21 +12,56 @@ standardized XML representation. It also supports reading of Debian-style
 DEP-11 metadata."
 HOMEPAGE="http://people.freedesktop.org/~hughsient/appstream-glib/"
 SRC_URI="http://people.freedesktop.org/~hughsient/appstream-glib/releases/appstream-glib-${VERSION}.tar.xz"
-PATCH_URI="
-	0.2.8-gettext.patch
-	0.2.8-no-undefined.patch
-"
 
-PKG_NAMES="${NAME} lib${NAME}1 lib${NAME}-devel lib${NAME}-doc girepository-AppStream1.0"
+PKG_NAMES="appstream-glib appstream-builder
+	libappstream-glib8 libappstream-glib-devel libappstream-glib-doc
+	libappstream-builder8 libappstream-builder-devel
+	girepository-AppStreamGlib1.0 girepository-AppStreamBuilder1.0"
 appstream_glib_CATEGORY="Devel"
 appstream_glib_SUMMARY="AppStream utilities"
-appstream_glib_CONTENTS="usr/bin/appstream-* usr/share/bash-completion/
-	usr/share/aclocal/appstream-xml.m4 usr/share/doc/
-	usr/share/installed-tests/ usr/share/locale/ usr/share/man/man1/"
-libappstream_glib1_CONTENTS="usr/bin/cygappstream-*-1.dll usr/lib/asb-plugins/"
-libappstream_glib_devel_CONTENTS="usr/include/libappstream-*
-	usr/lib/libappstream-*.dll.a usr/lib/pkgconfig/appstream-*.pc"
+appstream_glib_OBSOLETES="appdata-tools"
+appstream_glib_CONTENTS="
+	usr/bin/appstream-compose.exe
+	usr/bin/appstream-util.exe
+	usr/share/aclocal/appdata-xml.m4
+	usr/share/aclocal/appstream-xml.m4
+	usr/share/bash-completion/completions/appstream-util
+	usr/share/doc/${NAME}
+	usr/share/gettext/its/appdata.*
+	usr/share/locale/*/LC_MESSAGES/appstream-glib.mo
+	usr/share/man/man1/appstream-compose.1*
+	usr/share/man/man1/appstream-util.1*
+"
+appstream_builder_CATEGORY="Devel"
+appstream_builder_SUMMARY="AppStream builder"
+appstream_builder_CONTENTS="
+	usr/bin/appstream-builder.exe
+	usr/share/bash-completion/completions/appstream-builder
+	usr/share/man/man1/appstream-builder.1*
+"
+libappstream_glib8_CONTENTS="
+	usr/bin/cygappstream-glib-8.dll
+"
+libappstream_glib_devel_CONTENTS="
+	usr/include/libappstream-glib/
+	usr/lib/libappstream-glib.dll.a
+	usr/lib/pkgconfig/appstream-glib.pc
+"
 libappstream_glib_doc_CATEGORY="Doc"
 libappstream_glib_doc_CONTENTS="usr/share/gtk-doc/html/appstream-glib/"
-girepository_AppStream1_0_CONTENTS="usr/*/gir*-1.0/AppStream*-1.0.*"
+libappstream_builder8_CONTENTS="
+	usr/bin/cygappstream-builder-8.dll
+	usr/lib/asb-plugins-5/
+"
+libappstream_builder_devel_CONTENTS="
+	usr/include/libappstream-builder/
+	usr/lib/libappstream-builder.dll.a
+	usr/lib/pkgconfig/appstream-builder.pc
+"
+girepository_AppStreamGlib1_0_OBSOLETES="girepository-AppStream1.0"
+girepository_AppStreamGlib1_0_CONTENTS="usr/*/gir*-1.0/AppStreamGlib-1.0.*"
+girepository_AppStreamBuilder1_0_CONTENTS="usr/*/gir*-1.0/AppStreamBuilder-1.0.*"
+appstream_glib_debuginfo_OBSOLETES="appdata-tools-debuginfo"
+PKG_IGNORE="usr/share/installed-tests/${NAME}"
 
+CYGMESON_ARGS="-Denable-gtk-doc=true -Denable-rpm=false -Denable-stemmer=false"
